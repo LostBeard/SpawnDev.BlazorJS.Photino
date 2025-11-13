@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.Photino.App.Demo.Client.Services
 
 <PageTitle>Home</PageTitle>
 
@@ -15,13 +16,25 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
     [Inject]
     PhotinoAppDispatcher PhotinoAppDispatcher { get; set; } = default!;
 
+    [Inject]
+    IConsoleLogger ConsoleLogger { get; set; } = default!;
+
     private async Task OpenWindow()
     {
+        // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
+        await ConsoleLogger.LogAsync(">> Window being opened by " + PhotinoAppDispatcher.WindowId);
+
         // call PhotinoBlazorWASMApp.OpenWindow() in the Photino host app on the PhotinoBlazorWASMApp service
-        await PhotinoAppDispatcher.Run<PhotinoBlazorWASMApp>(s => s.OpenWindow());
+        var windowId = await PhotinoAppDispatcher.Run<PhotinoBlazorWASMApp, string>(s => s.OpenWindow());
+
+        // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
+        await ConsoleLogger.LogAsync(">> Window opened: " + windowId);
     }
     private async Task CloseThisWindow()
     {
+        // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
+        await ConsoleLogger.LogAsync(">> Window closing: " + PhotinoAppDispatcher.WindowId);
+
         // call PhotinoBlazorWASMWindow.Close() in the Photino host app on this window's PhotinoBlazorWASMWindow instance
         await PhotinoAppDispatcher.Run<PhotinoBlazorWASMWindow>(s => s.Close());
     }

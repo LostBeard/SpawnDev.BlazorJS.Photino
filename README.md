@@ -58,7 +58,9 @@ builder.Services.AddBlazorJSRuntime(out var JS);
 // PhotinoAppDispatcher lets us call into the Photino hosting app (if available)
 builder.Services.AddSingleton<PhotinoAppDispatcher>();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+// This adds IConsoleLogger provided by PhotinoAppDispatcher which will relay all 
+// async method calls to the Photino app instance via an interface DispatchProxy
+builder.Services.AddSingleton<IConsoleLogger>(sp => sp.GetRequiredService<PhotinoAppDispatcher>().GetService<IConsoleLogger>());
 
 // Start
 await builder.Build().BlazorJSRunAsync();
@@ -68,6 +70,7 @@ Example usage:
 ```razor
 @page "/"
 @using SpawnDev.BlazorJS.JSObjects
+@using SpawnDev.BlazorJS.Photino.App.Demo.Client.Services
 
 <PageTitle>Home</PageTitle>
 
@@ -83,15 +86,28 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
     [Inject]
     PhotinoAppDispatcher PhotinoAppDispatcher { get; set; } = default!;
 
+    [Inject]
+    IConsoleLogger ConsoleLogger { get; set; } = default!;
+
     private async Task OpenWindow()
     {
+        // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
+        await ConsoleLogger.LogAsync(">> Window being opened by " + PhotinoAppDispatcher.WindowId);
+
         // call PhotinoBlazorWASMApp.OpenWindow() in the Photino host app on the PhotinoBlazorWASMApp service
-        await PhotinoAppDispatcher.Run<PhotinoBlazorWASMApp>(s => s.OpenWindow());
+        var windowId = await PhotinoAppDispatcher.Run<PhotinoBlazorWASMApp, string>(s => s.OpenWindow());
+
+        // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
+        await ConsoleLogger.LogAsync(">> Window opened: " + windowId);
     }
     private async Task CloseThisWindow()
     {
+        // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
+        await ConsoleLogger.LogAsync(">> Window closing: " + PhotinoAppDispatcher.WindowId);
+
         // call PhotinoBlazorWASMWindow.Close() in the Photino host app on this window's PhotinoBlazorWASMWindow instance
         await PhotinoAppDispatcher.Run<PhotinoBlazorWASMWindow>(s => s.Close());
     }
 }
+
 ```
