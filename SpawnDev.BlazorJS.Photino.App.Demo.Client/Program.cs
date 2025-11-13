@@ -10,14 +10,23 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 // BlazorJSRuntime (PhotinoAppDispatcher dependency)
-builder.Services.AddBlazorJSRuntime(out var JS);
+builder.Services.AddBlazorJSRuntime();
 
-// PhotinoAppDispatcher lets us call into the Photino hosting app (if available)
+// PhotinoAppDispatcher lets Blazor WASM call into the Photino hosting app (if available) using:
+// Expressions:
+// var result = await PhotinoAppDispatcher.Run<TService, TResult>(service => service.SomeMethod(someVariable1, someVariable2));
+// - or  -
+// Interface DispatchProxy:
+// var service = PhotinoAppDispatcher.GetService<TService>() where T : interface
+// var result = await service.SomeMethod(someVariable1, someVariable2);
+// - or -
+// Register Photino host app service interface DispatchProxy and use as a normal service
+// (See IConsoleLogger below)
 builder.Services.AddSingleton<PhotinoAppDispatcher>();
 
 // This adds IConsoleLogger provided by PhotinoAppDispatcher which will relay all 
 // async method calls to the Photino app instance via an interface DispatchProxy
-builder.Services.AddSingleton<IConsoleLogger>(sp => sp.GetRequiredService<PhotinoAppDispatcher>().GetService<IConsoleLogger>());
+builder.Services.AddSingleton(sp => sp.GetRequiredService<PhotinoAppDispatcher>().GetService<IConsoleLogger>());
 
 // Start
 await builder.Build().BlazorJSRunAsync();
