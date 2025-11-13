@@ -10,6 +10,9 @@ public class PhotinoAppDispatcher : RemoteDispatcher, IAsyncBackgroundService
     /// <inheritdoc/>
     public Task Ready => _Ready ??= InitAsync();
     BlazorJSRuntime JS;
+    /// <summary>
+    /// Serialization options used for interop
+    /// </summary>
     public JsonSerializerOptions SerializerOptions { get; private set; } = new JsonSerializerOptions();
     ActionCallback<string>? External_OnMessageCallback;
     /// <summary>
@@ -64,6 +67,7 @@ public class PhotinoAppDispatcher : RemoteDispatcher, IAsyncBackgroundService
         }
         catch { }
     }
+    /// <inheritdoc/>
     protected override void SendCall(object?[] args)
     {
         if (!PhotinoFound) return;
@@ -74,6 +78,7 @@ public class PhotinoAppDispatcher : RemoteDispatcher, IAsyncBackgroundService
         }
         catch { }
     }
+    /// <inheritdoc/>
     public override void Dispose()
     {
         base.Dispose();

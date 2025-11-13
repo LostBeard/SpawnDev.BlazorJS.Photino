@@ -30,11 +30,19 @@ namespace SpawnDev.BlazorJS.Photino
         /// Returns true if connected and ready state has been reached.
         /// </summary>
         public bool IsReady => WhenReady.IsCompletedSuccessfully;
+        /// <summary>
+        /// Service provider scope
+        /// </summary>
         protected IServiceScope? ServiceProviderScope { get; private set; } = null;
+        /// <summary>
+        /// Scoped service provider
+        /// </summary>
         protected IServiceProvider ScopedServiceProvider { get; private set; }
-        //protected IServiceCollection ServiceDescriptors { get; private set; }
-        protected Dictionary<string, TaskCompletionSource<MessagePackList>> waitingResponse { get; private set; } = new Dictionary<string, TaskCompletionSource<MessagePackList>>();
-        object waitingResponseLock = new object();
+        private Dictionary<string, TaskCompletionSource<MessagePackList>> waitingResponse = new Dictionary<string, TaskCompletionSource<MessagePackList>>();
+        private object waitingResponseLock = new object();
+        /// <summary>
+        /// 
+        /// </summary>
         protected bool InheritAttributes { get; set; } = true;
         /// <summary>
         /// If set to true, calls from the remote peer onto this peer are enabled<br/>
@@ -338,11 +346,7 @@ namespace SpawnDev.BlazorJS.Photino
             else if (methodParamType.IsGenericType) genericType = methodParamType.GetGenericTypeDefinition();
             var coreType = genericType ?? methodParamType;
             // custom serialization can be done here tp package args![i]
-            if (value is ClaimsIdentity claimsIdentity)
-            {
-                ret = claimsIdentity == null ? null : claimsIdentity.ToBase64();
-            }
-            else if (value is CancellationToken token)
+            if (value is CancellationToken token)
             {
                 if (token.IsCancellationRequested)
                 {
@@ -499,11 +503,6 @@ namespace SpawnDev.BlazorJS.Photino
                         }));
                     }
                 }
-                else if (finalType == typeof(ClaimsIdentity))
-                {
-                    var sData = callArgs!.GetItem<string?>(paramIndex);
-                    return string.IsNullOrEmpty(sData) ? null : sData.Base64ToClaimsIdentity();
-                }
                 else if (finalType == typeof(CancellationToken))
                 {
                     // Create a local action that can be called to relay the call to the remote endpoint
@@ -586,7 +585,7 @@ namespace SpawnDev.BlazorJS.Photino
                 serviceTypeName = msg.Shift<string>();
                 targetType = TypeExtensions.GetType(serviceTypeName);
                 var methodInfoSerialized = msg.Shift<string>();
-                methodInfo = SerializableMethodInfoSlim.DeserializeMethodInfo(methodInfoSerialized);
+                methodInfo = string.IsNullOrWhiteSpace(methodInfoSerialized) ? null : SerializableMethodInfoSlim.DeserializeMethodInfo(methodInfoSerialized);
                 if (methodInfo == null)
                 {
                     retError = "HandleCallError: Method not found";

@@ -1,7 +1,29 @@
 ﻿@page "/"
+@using SpawnDev.BlazorJS.JSObjects
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Home</h1>
 
-Welcome to your new app.
+Connected to Photino app services: @PhotinoAppDispatcher.IsReady
+<br />
+
+<button disabled="@(!PhotinoAppDispatcher.IsReady)" class="btn btn-primary" @onclick="OpenWindow">Open Window</button>
+<button disabled="@(!PhotinoAppDispatcher.IsReady)" class="btn btn-primary" @onclick="CloseThisWindow">Close this window</button>
+
+@code {
+    [Inject]
+    PhotinoAppDispatcher PhotinoAppDispatcher { get; set; } = default!;
+
+    [Inject]
+    BlazorJSRuntime JS { get; set; } = default!;
+
+    private async Task OpenWindow()
+    {
+        await PhotinoAppDispatcher.Run<PhotinoBlazorWASMApp>(s => s.OpenWindow());
+    }
+    private async Task CloseThisWindow()
+    {
+        await PhotinoAppDispatcher.Run<PhotinoBlazorWASMWindow>(s => s.Close());
+    }
+}

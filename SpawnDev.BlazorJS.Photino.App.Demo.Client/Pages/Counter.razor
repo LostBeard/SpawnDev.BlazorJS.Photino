@@ -1,5 +1,4 @@
 ﻿@page "/counter"
-@using SpawnDev.BlazorJS.JSObjects
 
 <PageTitle>Counter</PageTitle>
 
@@ -9,30 +8,12 @@
 
 <button class="btn btn-primary" @onclick="Increment">Increment</button><br/>
 
-Connected to Photino app services: @PhotinoAppDispatcher.IsReady <br/>
-
-<button disabled="@(!PhotinoAppDispatcher.IsReady)" class="btn btn-primary" @onclick="OpenWindow">Open Window</button>
-<button disabled="@(!PhotinoAppDispatcher.IsReady)" class="btn btn-primary" @onclick="CloseThisWindow">Close this window</button>
-
 @code {
-    [Inject]
-    PhotinoAppDispatcher PhotinoAppDispatcher { get; set; } = default!;
-
-    [Inject]
-    BlazorJSRuntime JS { get; set; } = default!;
 
     private int currentCount = 0;
 
     private void Increment()
     {
         currentCount++;
-    }
-    private async Task OpenWindow()
-    {
-        await PhotinoAppDispatcher.Run<PhotinoBlazorWASMApp>(s => s.OpenWindow());
-    }
-    private async Task CloseThisWindow()
-    {
-        await PhotinoAppDispatcher.Run<PhotinoBlazorWASMWindow>(s => s.Close());
     }
 }
