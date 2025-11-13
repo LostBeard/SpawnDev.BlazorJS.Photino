@@ -17,7 +17,10 @@ namespace HelloPhotinoApp
             appBuilder.Services
                 .AddLogging();
 
-            // add services that Blazor WebAssembly instances can call
+            // add services that Blazor WebAssembly instances can call using the WebAssembly service PhotinoAppDispatcher
+            // Singleton services are shared with all windows
+            // Scoped services are per-window
+            // Transient are per call
             appBuilder.Services.AddSingleton<IConsoleLogger, ConsoleLogger>();
 
             // build

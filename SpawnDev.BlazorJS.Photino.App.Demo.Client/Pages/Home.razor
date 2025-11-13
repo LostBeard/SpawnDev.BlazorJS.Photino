@@ -15,15 +15,14 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
     [Inject]
     PhotinoAppDispatcher PhotinoAppDispatcher { get; set; } = default!;
 
-    [Inject]
-    BlazorJSRuntime JS { get; set; } = default!;
-
     private async Task OpenWindow()
     {
+        // call PhotinoBlazorWASMApp.OpenWindow() in the Photino host app on the PhotinoBlazorWASMApp service
         await PhotinoAppDispatcher.Run<PhotinoBlazorWASMApp>(s => s.OpenWindow());
     }
     private async Task CloseThisWindow()
     {
+        // call PhotinoBlazorWASMWindow.Close() in the Photino host app on this window's PhotinoBlazorWASMWindow instance
         await PhotinoAppDispatcher.Run<PhotinoBlazorWASMWindow>(s => s.Close());
     }
 }
