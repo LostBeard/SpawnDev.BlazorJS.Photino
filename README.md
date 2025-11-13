@@ -3,8 +3,8 @@
 
 SpawnDev.BlazorJS.Photino provides tools for 2 way interop, similar to SignalR, between the native Photino app and Blazor WebAssembly apps running in PhotinoWindow instances.
 
-
-Photino.Net app `Program.cs`  
+Photino.Net app   
+`Program.cs`  
 ```cs
 // Create RemoteServiceProviderBuilder
 var appBuilder = PhotinoBlazorWASMAppBuilder.CreateDefault(args);
@@ -48,7 +48,8 @@ app.SetAppBaseUri("https://localhost:7174/");
 app.Run();
 ```
 
-Blazor WebAssembly app `Program.cs`  
+Blazor WebAssembly app  
+`Program.cs`  
 ```cs
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
