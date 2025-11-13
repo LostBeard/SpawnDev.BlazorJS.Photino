@@ -17,7 +17,7 @@ builder.Services.AddBlazorJSRuntime();
 // var result = await PhotinoAppDispatcher.Run<TService, TResult>(service => service.SomeMethod(someVariable1, someVariable2));
 // - or  -
 // Interface DispatchProxy:
-// var service = PhotinoAppDispatcher.GetService<TService>() where T : interface
+// var service = PhotinoAppDispatcher.GetService<TService>() where TService : interface
 // var result = await service.SomeMethod(someVariable1, someVariable2);
 // - or -
 // Register Photino host app service interface DispatchProxy and use as a normal service
