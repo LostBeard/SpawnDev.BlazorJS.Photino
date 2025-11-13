@@ -126,8 +126,7 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
 }
 ```
 
-#### Blazor WebAssembly libraries
-
+### Blazor WebAssembly libraries
 Blazor WebAssembly libraries ready to use in your next Photino Blazor WebAssembly app.
 
 - [TransformersJS](https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS) - Use Transformers.js to run pretrained models with the ONNX Runtime
