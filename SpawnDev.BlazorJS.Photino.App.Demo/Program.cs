@@ -49,6 +49,7 @@ namespace HelloPhotinoApp
             app.SetAppBaseUri("https://localhost:7174/");
 #endif
 
+            // Start app. Show main window
             app.Run();
         }
     }
