@@ -1,8 +1,8 @@
 ﻿# SpawnDev.BlazorJS.Photino
 [![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.svg?label=SpawnDev.BlazorJS.Photino)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino) 
 
-Run Blazor WebAssembly in your [Photino.Net](https://github.com/tryphotino/photino.NET) app 
-with 2 way interop, similar to SignalR, between the Photino app and Blazor WebAssembly instances.
+Run Blazor WebAssembly in [Photino.Net](https://github.com/tryphotino/photino.NET) apps 
+with 2 way interop between the app and Blazor WebAssembly instances.
 
 #### Why
 > Photino.Blazor already exists, why use this?  
