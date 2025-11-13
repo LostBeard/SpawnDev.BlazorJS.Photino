@@ -126,8 +126,10 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
 }
 ```
 
-#### SpawnDev.BlazorJS
-Libraries ready to use in Blazor WebAssembly:  
+#### Blazor WebAssembly libraries
+
+Notable Blazor WebAssembly libraries:  
+
 - [TransformersJS](https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS) - Use Transformers.js to run pretrained models with the ONNX Runtime
 
 - [WebTorrents](https://github.com/LostBeard/SpawnDev.BlazorJS.WebTorrents) - WebTorrent peer to peer file sharing
@@ -137,3 +139,8 @@ Libraries ready to use in Blazor WebAssembly:
 - [PeerJS](https://github.com/LostBeard/SpawnDev.BlazorJS.PeerJS) - PeerJS simplifies peer-to-peer data, video, and audio calls
 
 - [Cryptography](https://github.com/LostBeard/SpawnDev.BlazorJS.Cryptography) - A cross platform cryptography library ECDSA, ECDH, AES-CBC, etc
+
+- [More](https://github.com/LostBeard) - More Blazor WebAssembly projects by LostBeard
+
+- [Nuget Packages](https://www.nuget.org/profiles/LostBeard) - Blazor WebAssembly Nuget packages by LostBeard
+
