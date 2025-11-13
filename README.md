@@ -65,7 +65,7 @@ await builder.Build().BlazorJSRunAsync();
 ```
 
 Example usage:  
-```cs
+```razor
 @page "/"
 @using SpawnDev.BlazorJS.JSObjects
 
