@@ -8,7 +8,9 @@
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="Increment">Increment</button><br/>
+
 Connected to Photino app services: @PhotinoAppDispatcher.IsReady <br/>
+
 <button disabled="@(!PhotinoAppDispatcher.IsReady)" class="btn btn-primary" @onclick="OpenWindow">Open Window</button>
 <button disabled="@(!PhotinoAppDispatcher.IsReady)" class="btn btn-primary" @onclick="CloseThisWindow">Close this window</button>
 
