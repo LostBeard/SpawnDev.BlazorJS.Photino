@@ -71,7 +71,6 @@ await builder.Build().BlazorJSRunAsync();
 Example usage:  
 ```razor
 @page "/"
-@using SpawnDev.BlazorJS.JSObjects
 @using SpawnDev.BlazorJS.Photino.App.Demo.Client.Services
 
 <PageTitle>Home</PageTitle>
@@ -102,6 +101,7 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
         // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
         await ConsoleLogger.LogAsync(">> Window opened: " + windowId);
     }
+
     private async Task CloseThisWindow()
     {
         // this calls IConsoleLogger.LogAsync() which relays the call to the Photino host app IConsoleLogger service
@@ -111,5 +111,4 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
         await PhotinoAppDispatcher.Run<PhotinoBlazorWASMWindow>(s => s.Close());
     }
 }
-
 ```
