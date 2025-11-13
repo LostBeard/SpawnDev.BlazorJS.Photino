@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
 
 namespace SpawnDev.BlazorJS.Photino;
 /// <summary>
@@ -36,12 +37,19 @@ public class PhotinoAppDispatcher : RemoteDispatcher, IAsyncBackgroundService
         AllowSpecialMethods = true;
         AllowStaticMethods = true;
         AllowNonServiceStaticMethods = true;
-        if (JS.IsBrowser)
-        {
-            PhotinoFound = !JS.IsUndefined("external?.sendMessage") && !JS.IsUndefined("external?.receiveMessage");
-        }
+        PhotinoFound = PhotinoBlazorWASM;
     }
-    async  Task InitAsync()
+    static Lazy<bool> _PhotinoBlazorWASM = new Lazy<bool>(() =>
+    {
+        return BlazorJSRuntime.JS.IsBrowser == true
+        && BlazorJSRuntime.JS?.IsUndefined("external?.sendMessage") == false
+        && BlazorJSRuntime.JS?.IsUndefined("external?.receiveMessage") == false;
+    });
+    /// <summary>
+    /// Returns true if the app appears to be running Blazor WASM in a Photino window
+    /// </summary>
+    public static bool PhotinoBlazorWASM => _PhotinoBlazorWASM.Value;
+    async Task InitAsync()
     {
         if (PhotinoFound)
         {
