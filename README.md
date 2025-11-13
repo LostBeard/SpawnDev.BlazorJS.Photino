@@ -83,7 +83,7 @@ builder.Services.AddSingleton<PhotinoAppDispatcher>();
 
 // This adds IConsoleLogger provided by PhotinoAppDispatcher which will relay all 
 // async method calls to the Photino app instance via an interface DispatchProxy
-builder.Services.AddSingleton(sp => sp.GetPhotinoAppService<IConsoleLogger>());
+builder.Services.AddSingleton(sp => sp.GetRequiredService<PhotinoAppDispatcher>().GetService<IConsoleLogger>());
 
 // Start
 await builder.Build().BlazorJSRunAsync();
