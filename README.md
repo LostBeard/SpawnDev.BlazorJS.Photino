@@ -6,14 +6,16 @@ SpawnDev.BlazorJS.Photino provides tools for 2 way interop, similar to SignalR, 
 
 Photino.Net app `Program.cs`  
 ```cs
-// create RemoteServiceProviderBuilder
+// Create RemoteServiceProviderBuilder
 var appBuilder = PhotinoBlazorWASMAppBuilder.CreateDefault(args);
 
-// add services that Blazor WebAssembly instances can call using the WebAssembly service PhotinoAppDispatcher
+// Blazor WebAssembly instances can call these services using expressions or 
+// an interface DispatchProxy provided by the PhotinoAppDispatcher service
 // Singleton services are shared with all windows
 // Scoped services are per-window
 // Transient are per call
 
+// The demo uses this service via an interface DispatchProxy
 appBuilder.Services.AddSingleton<IConsoleLogger, ConsoleLogger>();
 
 // build
@@ -36,7 +38,7 @@ app.IndependentWindows = false;
 app.InvisibleKeepAlive = false;
 
 #if DEBUG
-// url where the Blazor WebAssembly dev server is hosting when DEBUG
+// Set the Url where the Blazor WebAssembly dev server is hosting when DEBUG
 // if not set, the app's "wwwroot/index.html" path will be used.
 // In production a release build of your Blazor WASM app could be served from there.
 app.SetAppBaseUri("https://localhost:7174/");
