@@ -3,6 +3,17 @@
 
 SpawnDev.BlazorJS.Photino provides tools for 2 way interop, similar to SignalR, between the native Photino app and Blazor WebAssembly apps running in PhotinoWindow instances.
 
+#### Why
+> Photino.Blazor already exists, why use this?  
+
+#### Answer
+Like Photino.Blazor, SpawnDev.BlazorJS.Photino provides shared services that run in the Photino app that each window can use.
+But SpawnDev.BlazorJS.Photino adds the benefits of Blazor WebAssembly + [SpawnDev.BlazorJS](https://github.com/LostBeard/SpawnDev.BlazorJS) which gives access 
+to all of the awesome browser [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) like WebRTC, Canvas, WebGL, WEbGPU, etc. directly from C#, 
+no Javascript required.
+
+### Example
+
 Photino.Net app   
 `Program.cs`  
 ```cs
@@ -114,3 +125,15 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
     }
 }
 ```
+
+#### SpawnDev.BlazorJS
+Libraries ready to use in Blazor WebAssembly:  
+- [TransformersJS](https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS) - Use Transformers.js to run pretrained models with the ONNX Runtime
+
+- [WebTorrents](https://github.com/LostBeard/SpawnDev.BlazorJS.WebTorrents) - WebTorrent peer to peer file sharing
+
+- [SocketIO](https://github.com/LostBeard/SpawnDev.BlazorJS.SocketIO) - Socket.IO bidirectional and low-latency communication for every platform
+
+- [PeerJS](https://github.com/LostBeard/SpawnDev.BlazorJS.PeerJS) - PeerJS simplifies peer-to-peer data, video, and audio calls
+
+- [Cryptography](https://github.com/LostBeard/SpawnDev.BlazorJS.Cryptography) - A cross platform cryptography library ECDSA, ECDH, AES-CBC, etc
