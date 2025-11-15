@@ -1,5 +1,5 @@
 ﻿# SpawnDev.BlazorJS.Photino
-[![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.App.svg?label=SpawnDev.BlazorJS.Photino)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino.App)   
+[![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.App.svg?label=SpawnDev.BlazorJS.Photino.App)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino.App)   
 Use this package to create shared services accessible to your Blazor WebAssembly windows. 
 
 [![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.svg?label=SpawnDev.BlazorJS.Photino)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino)   

@@ -63,7 +63,7 @@
 			<HostProjectWwwrootDir>$(ProjectDir)wwwroot</HostProjectWwwrootDir>
 		</PropertyGroup>
 		<Message Text="Building Blazor WASM content from $(BlazorWasmPublishDir)" Importance="high" />
-		<!-- create publish build of the Balzor WebAssembly app -->
+		<!-- create publish build of the Blazor WebAssembly app -->
 		<Exec Command="dotnet publish &quot;$(BlazorWasmProjectDir)&quot; -c $(Configuration) -o &quot;$(BlazorWasmProjectDir)\Publish\$(Configuration)\net8.0\publish&quot;" />
 		<Message Text="Copying Blazor WASM content from $(BlazorWasmPublishDir) to $(HostProjectWwwrootDir)" Importance="high" />
 		<!-- copy the Blazor WASM app to this projects wwwroot so it is included in the build -->
