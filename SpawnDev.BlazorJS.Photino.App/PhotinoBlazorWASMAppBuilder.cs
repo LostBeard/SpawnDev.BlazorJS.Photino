@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace SpawnDev.BlazorJS.Photino;
-
 /// <summary>
 /// Builds PhotinoBlazorWASMApp
 /// </summary>
@@ -26,6 +25,7 @@ public class PhotinoBlazorWASMAppBuilder
         PhotinoBlazorWASMAppBuilder photinoBlazorAppBuilder = new PhotinoBlazorWASMAppBuilder();
         photinoBlazorAppBuilder.Services.AddSingleton<IServiceCollection>(photinoBlazorAppBuilder.Services);
         photinoBlazorAppBuilder.Services.AddSingleton<IServiceProvider>(sp => sp);
+        photinoBlazorAppBuilder.Services.AddSingleton<IWebRootServer, WebRootServer>();
         photinoBlazorAppBuilder.Services.AddSingleton<PhotinoBlazorWASMApp>();
         return photinoBlazorAppBuilder;
     }

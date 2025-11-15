@@ -9,6 +9,7 @@ namespace SpawnDev.BlazorJS.Photino;
 /// </summary>
 public class PhotinoBlazorWASMApp
 {
+    IWebRootServer WebRootServer;
     //TaskCompletionSource exitTokenSource = new TaskCompletionSource();
     /// <summary>
     /// Returns the window count
@@ -34,8 +35,10 @@ public class PhotinoBlazorWASMApp
     /// New instance
     /// </summary>
     /// <param name="serviceProvider"></param>
-    public PhotinoBlazorWASMApp(IServiceProvider serviceProvider)
+    /// <param name="webRootServer"></param>
+    public PhotinoBlazorWASMApp(IServiceProvider serviceProvider, IWebRootServer webRootServer)
     {
+        WebRootServer = webRootServer;
         Services = serviceProvider;
         SerializerOptions.Converters.Add(new IntPtrJsonConverter());
         SerializerOptions.Converters.Add(new ClaimsIdentityConverter());
@@ -63,7 +66,7 @@ public class PhotinoBlazorWASMApp
     {
         var instance = Windows.FirstOrDefault(x => x.Window == window);
         if (instance != null) return instance;
-        instance = new PhotinoBlazorWASMWindow(this, Services, window, SerializerOptions);
+        instance = new PhotinoBlazorWASMWindow(Services, window, SerializerOptions);
         Windows.Add(instance);
         window.WindowClosing += Window_WindowClosing;
         return instance;
@@ -142,13 +145,12 @@ public class PhotinoBlazorWASMApp
             return;
         }
         string text = Path.GetFullPath(path);
-        if (!File.Exists(text))
+        if (!File.Exists(text) && !Directory.Exists(text))
         {
             text = AppContext.BaseDirectory + "/" + path;
-            if (!File.Exists(text))
+            if (File.Exists(AppContext.BaseDirectory + "/" + path) || Directory.Exists(AppContext.BaseDirectory + "/" + path))
             {
-                Log(" ** File \"" + path + "\" could not be found.");
-                return;
+                text = AppContext.BaseDirectory + "/" + path;
             }
         }
         SetAppBaseUri(new Uri(text, UriKind.Absolute));
@@ -218,7 +220,14 @@ public class PhotinoBlazorWASMApp
     {
         if (MainWindow == null)
         {
-            if (AppBaseUri == null) SetAppBaseUri("wwwroot/index.html");
+            if (AppBaseUri == null) SetAppBaseUri("wwwroot");
+            if (AppBaseUri!.Scheme == "file")
+            {
+                var localPath = AppBaseUri.LocalPath;
+                // start http server so we can  use http instead of file or Blazor will fail to load and some  features will not work
+                WebRootServer.CreateStaticFileServer(localPath, out string baseUrl);
+                SetAppBaseUri(baseUrl);
+            }
             var window = new PhotinoWindow()
                 .Load(AppBaseUri);
             AddWindow(window);

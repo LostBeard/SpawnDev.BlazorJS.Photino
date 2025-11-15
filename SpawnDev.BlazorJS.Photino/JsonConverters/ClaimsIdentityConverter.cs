@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.Photino.JsonConverters
 {
-    internal class ClaimsIdentityConverter : JsonConverter<ClaimsIdentity>
+    public class ClaimsIdentityConverter : JsonConverter<ClaimsIdentity>
     {
         public override ClaimsIdentity Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

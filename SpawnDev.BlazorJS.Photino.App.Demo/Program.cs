@@ -1,7 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using Photino.NET.Server;
 using SpawnDev;
 using SpawnDev.BlazorJS.Photino;
+using SpawnDev.BlazorJS.Photino.App.Demo.Client;
 using SpawnDev.BlazorJS.Photino.App.Demo.Client.Services;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Reflection;
 
 namespace HelloPhotinoApp
 {
@@ -43,11 +51,14 @@ namespace HelloPhotinoApp
             /// </summary>
             app.InvisibleKeepAlive = false;
 
-#if DEBUG
+#if DEBUG && false
             // Set the Url where the Blazor WebAssembly dev server is hosting when DEBUG
             // if not set, the app's "wwwroot/index.html" path will be used.
             // In production a release build of your Blazor WASM app could be served from there.
             app.SetAppBaseUri("https://localhost:7174/");
+#else
+            //_ = WebRootServer.CreateStaticFileServer(Array.Empty<string>(), out string baseUrl).RunAsync();
+            //app.SetAppBaseUri(baseUrl);
 #endif
 
             // Start app. Show main window

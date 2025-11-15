@@ -21,17 +21,14 @@ public class PhotinoBlazorWASMWindow : RemoteDispatcher
     /// </summary>
     public bool CanHide => PhotinoWindow.IsWindowsPlatform;
     JsonSerializerOptions SerializerOptions;
-    PhotinoBlazorWASMApp PhotinoBlazorWASMApp;
     /// <summary>
     /// New instance
     /// </summary>
-    /// <param name="photinoBlazorWASMApp"></param>
     /// <param name="serviceProvider"></param>
     /// <param name="window"></param>
     /// <param name="serializerOptions"></param>
-    public PhotinoBlazorWASMWindow(PhotinoBlazorWASMApp photinoBlazorWASMApp, IServiceProvider serviceProvider, PhotinoWindow window, JsonSerializerOptions serializerOptions) : base(serviceProvider, createNewScope: true)
+    public PhotinoBlazorWASMWindow(IServiceProvider serviceProvider, PhotinoWindow window, JsonSerializerOptions serializerOptions) : base(serviceProvider, createNewScope: true)
     {
-        PhotinoBlazorWASMApp = photinoBlazorWASMApp;
         Window = window;
         SerializerOptions = serializerOptions;
         window.WebMessageReceived += HandleMessage;
@@ -97,7 +94,7 @@ public class PhotinoBlazorWASMWindow : RemoteDispatcher
     /// <returns></returns>
     protected override async Task<object?> GetServiceAsync(Type parameterType)
     {
-        if (parameterType == typeof(PhotinoWindow))
+        if (parameterType == typeof(PhotinoWindow) || parameterType == typeof(PhotinoWindow))
         {
             return Window;
         }
@@ -118,7 +115,7 @@ public class PhotinoBlazorWASMWindow : RemoteDispatcher
             }
         }
         catch
-        { 
+        {
             // invalid message likely
         }
     }

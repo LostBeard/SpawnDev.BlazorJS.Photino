@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore the publish build of the Balzor WASM app in the Photino apps wwwroot
+SpawnDev.BlazorJS.Photino.App.Demo/wwwroot/**

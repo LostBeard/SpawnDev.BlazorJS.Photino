@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace SpawnDev.BlazorJS.Photino.JsonConverters
 {
-    internal class IntPtrJsonConverter : JsonConverter<nint>
+    public class IntPtrJsonConverter : JsonConverter<nint>
     {
         public override nint Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

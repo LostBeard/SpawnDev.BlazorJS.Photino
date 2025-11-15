@@ -9,9 +9,9 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<EmbedAllSources>true</EmbedAllSources>
 		<DebugType>Embedded</DebugType>
-		<Title>SpawnDev.BlazorJS.Photino</Title>
+		<Title>SpawnDev.BlazorJS.Photino.App</Title>
 		<Authors>LostBeard</Authors>
-		<Description>Blazor WebAssembly in Photino. Use this package in the Blazor WebAssembly project.</Description>
+		<Description>Blazor WebAssembly in Photino. Use this package in the Photino.Net app project.</Description>
 		<PackageProjectUrl>https://github.com/LostBeard/SpawnDev.BlazorJS.Photino</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -29,17 +29,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Photino.NET.Server" Version="4.0.12" />
 		<PackageReference Include="Photino.NET" Version="3.2.3" />
-		<PackageReference Include="SpawnDev.BlazorJS.WebWorkers" Version="2.24.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.21" />
-		<PackageReference Include="System.Text.Json" Version="8.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<SupportedPlatform Include="browser" />
+	  <ProjectReference Include="..\SpawnDev.BlazorJS.Photino\SpawnDev.BlazorJS.Photino.csproj" />
 	</ItemGroup>
 
 </Project>

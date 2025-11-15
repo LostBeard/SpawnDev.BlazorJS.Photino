@@ -1,26 +1,76 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
+		<!--
+		General properties
+		-->
+		<OutputType>WinExe</OutputType>
 		<TargetFramework>net8.0</TargetFramework>
-		<Platforms>AnyCPU</Platforms>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+
+		<!--
+		Publish properties
+		-->
+		
+		<!-- Set the application icon -->
+		<ApplicationIcon>./icon-192.ico</ApplicationIcon>
+
+		<!-- Bundle .NET runtime -->
+		<SelfContained>true</SelfContained>
+
+		<!-- Bundle all dependencies into a single executable -->
+		<PublishSingleFile>true</PublishSingleFile>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+
+		<!-- Enable compression for the single executable -->
+		<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
+		<!--
+		Disable default content for better control of which files are bundled.
+		See https://docs.microsoft.com/en-us/dotnet/core/deploying/single-file#default-content-in-single-file-bundles
+		-->
+		
+		<EnableDefaultContent>false</EnableDefaultContent>
+		<EnableDefaultContentItems>false</EnableDefaultContentItems>
+
+		<!-- Include debug symbols into the executable -->
+		<DebugType>embedded</DebugType>
+
+		<PublishDir>./bin/Publish</PublishDir>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="wwwroot\**" />
-		<None Update="wwwroot\**">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
+		<Content Include="wwwroot/**" CopyToOutputDirectory="PreserveNewest" />
+		<Content Include="icon-192.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Photino.NET.Server" Version="4.0.12" />
 		<PackageReference Include="Photino.NET" Version="3.2.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\SpawnDev.BlazorJS.Photino.App.Demo.Client\SpawnDev.BlazorJS.Photino.App.Demo.Client.csproj" />
+		<ProjectReference Include="..\SpawnDev.BlazorJS.Photino.App\SpawnDev.BlazorJS.Photino.App.csproj" />
 	</ItemGroup>
+
+	<Target Name="CopyBlazorWasmContent" BeforeTargets="PrepareForPublish">
+		<!-- Build Blazor WASM and then copy to this project -->
+		<PropertyGroup>
+			<BlazorWasmProjectDir>$(ProjectDir)..\SpawnDev.BlazorJS.Photino.App.Demo.Client</BlazorWasmProjectDir>
+			<BlazorWasmPublishDir>$(BlazorWasmProjectDir)\Publish\$(Configuration)\net8.0\publish\wwwroot</BlazorWasmPublishDir>
+			<HostProjectWwwrootDir>$(ProjectDir)wwwroot</HostProjectWwwrootDir>
+		</PropertyGroup>
+		<Message Text="Building Blazor WASM content from $(BlazorWasmPublishDir)" Importance="high" />
+		<!-- create publish build of the Balzor WebAssembly app -->
+		<Exec Command="dotnet publish &quot;$(BlazorWasmProjectDir)&quot; -c $(Configuration) -o &quot;$(BlazorWasmProjectDir)\Publish\$(Configuration)\net8.0\publish&quot;" />
+		<Message Text="Copying Blazor WASM content from $(BlazorWasmPublishDir) to $(HostProjectWwwrootDir)" Importance="high" />
+		<!-- copy the Blazor WASM app to this projects wwwroot so it is included in the build -->
+		<ItemGroup>
+			<Content Include="$(BlazorWasmPublishDir)\**" LinkBase="wwwroot\" CopyToPublishDirectory="PreserveNewest" />
+		</ItemGroup>
+		<Copy SourceFiles="@(Content)" DestinationFiles="@(Content->'$(HostProjectWwwrootDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+	</Target>
 
 </Project>
