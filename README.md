@@ -3,12 +3,11 @@ SpawnDev.BlazorJS.Photino enables running Blazor WebAssembly in [Photino.Net](ht
 with 2 way interop.
 
 ### Nuget Packages
-
 [![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.App.svg?label=SpawnDev.BlazorJS.Photino.App)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino.App)   
-- Add this package in the Photino.Net App to host Blazor WebAssembly windows with shared services.
+Add this package in the Photino.Net App to host Blazor WebAssembly windows with shared services.
 
 [![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.svg?label=SpawnDev.BlazorJS.Photino)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino)   
-- Add this package in Blazor WebAssembly for interop with the shared services running in the Photino.Net app.
+Add this package in Blazor WebAssembly for interop with the shared services running in the Photino.Net app.
 
 ### Why
 > Photino.Blazor already exists, why use this?  
