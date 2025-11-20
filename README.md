@@ -1,7 +1,6 @@
 ﻿# SpawnDev.BlazorJS.Photino
-
-Run Blazor WebAssembly in [Photino.Net](https://github.com/tryphotino/photino.NET) apps 
-with 2 way interop between the app and Blazor WebAssembly instances.
+SpawnDev.BlazorJS.Photino enables running Blazor WebAssembly in [Photino.Net](https://github.com/tryphotino/photino.NET) apps 
+with 2 way interop.
 
 ### Nuget Packages
 
