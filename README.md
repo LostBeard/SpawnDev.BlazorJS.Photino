@@ -1,21 +1,24 @@
 ﻿# SpawnDev.BlazorJS.Photino
-[![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.App.svg?label=SpawnDev.BlazorJS.Photino.App)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino.App)   
-Use this package in the Photino App to host Blazor WebAssembly windows with shared services.
-
-[![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.svg?label=SpawnDev.BlazorJS.Photino)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino)   
-Use this package in Blazor WebAssembly for interop with the shared services running in the Photino.Net app.
 
 Run Blazor WebAssembly in [Photino.Net](https://github.com/tryphotino/photino.NET) apps 
 with 2 way interop between the app and Blazor WebAssembly instances.
 
-#### Why
+### Nuget Packages
+
+[![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.App.svg?label=SpawnDev.BlazorJS.Photino.App)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino.App)   
+- Add this package in the Photino.Net App to host Blazor WebAssembly windows with shared services.
+
+[![NuGet](https://img.shields.io/nuget/dt/SpawnDev.BlazorJS.Photino.svg?label=SpawnDev.BlazorJS.Photino)](https://www.nuget.org/packages/SpawnDev.BlazorJS.Photino)   
+- Add this package in Blazor WebAssembly for interop with the shared services running in the Photino.Net app.
+
+### Why
 > Photino.Blazor already exists, why use this?  
 
 #### Answer
 Like Photino.Blazor, SpawnDev.BlazorJS.Photino provides shared services that run in the Photino app that each window can use.
 But SpawnDev.BlazorJS.Photino adds the benefits of Blazor WebAssembly + [SpawnDev.BlazorJS](https://github.com/LostBeard/SpawnDev.BlazorJS) which gives access 
 to all of the awesome browser [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) like WebRTC, Canvas, WebGL, WEbGPU, etc. directly from C#, 
-no Javascript required.
+ **no Javascript required**.
 
 ### Example
 
