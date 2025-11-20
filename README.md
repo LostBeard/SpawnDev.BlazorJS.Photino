@@ -13,10 +13,9 @@ Add this package in Blazor WebAssembly for interop with the shared services runn
 > Photino.Blazor already exists, why use this?  
 
 #### Answer
-Like Photino.Blazor, SpawnDev.BlazorJS.Photino provides shared services that run in the Photino app that each window can use.
-But SpawnDev.BlazorJS.Photino adds the benefits of Blazor WebAssembly + [SpawnDev.BlazorJS](https://github.com/LostBeard/SpawnDev.BlazorJS) which gives access 
-to all of the awesome browser [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) like WebRTC, Canvas, WebGL, WEbGPU, etc. directly from C#, 
- **no Javascript required**.
+In Photino.Blazor, .Net only runs in the main process. In SpawnDev.BlazorJS.Photino, .Net runs in the main process and in the browser instances, 
+enabling direct C# access to all of the awesome browser [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) like WebRTC, Canvas, 
+WebGL, WEbGPU, etc. directly from C#, **no Javascript required**. See [Blazor WebAssembly libraries](#blazor-webassembly-libraries)
 
 ### Example
 
@@ -133,7 +132,9 @@ Connected to Photino app services: @PhotinoAppDispatcher.IsReady
 ```
 
 ### Blazor WebAssembly libraries
-Blazor WebAssembly libraries ready to use in your next Photino Blazor WebAssembly app.
+Javascript `<->` C# interop is provided by [SpawnDev.BlazorJS](https://github.com/LostBeard/SpawnDev.BlazorJS).
+Here are some Blazor WebAssembly libraries ready to use in your next Photino Blazor WebAssembly app. 
+
 
 - [TransformersJS](https://github.com/LostBeard/SpawnDev.BlazorJS.TransformersJS) - Use Transformers.js to run pretrained models with the ONNX Runtime
 - [WebTorrents](https://github.com/LostBeard/SpawnDev.BlazorJS.WebTorrents) - WebTorrent peer to peer file sharing
