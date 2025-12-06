@@ -4,7 +4,7 @@
 		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Version>1.1.0</Version>
+		<Version>1.2.0</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<EmbedAllSources>true</EmbedAllSources>
@@ -30,7 +30,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Photino.NET" Version="4.0.16" />
-		<PackageReference Include="SpawnDev.BlazorJS.WebWorkers" Version="2.25.0" />
+		<PackageReference Include="SpawnDev.BlazorJS.WebWorkers" Version="2.26.0" />
 	</ItemGroup>
 
 	<ItemGroup>

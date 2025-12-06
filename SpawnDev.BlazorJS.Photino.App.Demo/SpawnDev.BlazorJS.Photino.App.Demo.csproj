@@ -30,7 +30,6 @@
 		Disable default content for better control of which files are bundled.
 		See https://docs.microsoft.com/en-us/dotnet/core/deploying/single-file#default-content-in-single-file-bundles
 		-->
-		
 		<EnableDefaultContent>false</EnableDefaultContent>
 		<EnableDefaultContentItems>false</EnableDefaultContentItems>
 

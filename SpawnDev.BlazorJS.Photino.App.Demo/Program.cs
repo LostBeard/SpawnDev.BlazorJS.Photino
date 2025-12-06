@@ -1,15 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
-using Photino.NET.Server;
+﻿using Microsoft.Extensions.DependencyInjection;
 using SpawnDev;
 using SpawnDev.BlazorJS.Photino;
-using SpawnDev.BlazorJS.Photino.App.Demo.Client;
 using SpawnDev.BlazorJS.Photino.App.Demo.Client.Services;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection;
 
 namespace HelloPhotinoApp
 {
