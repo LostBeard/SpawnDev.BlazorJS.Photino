@@ -30,7 +30,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Photino.NET" Version="4.0.16" />
-		<PackageReference Include="SpawnDev.BlazorJS.WebWorkers" Version="2.26.0" />
+		<PackageReference Include="SpawnDev.BlazorJS.WebWorkers" Version="2.37.0" />
 	</ItemGroup>
 
 	<ItemGroup>
